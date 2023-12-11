@@ -9,9 +9,10 @@ export default function Payment() {
 
   const handleTicketClick = (index) => {
     setSelectedTicket(index === selectedTicket ? null : index);
+    //console.log(typeTickets[selectedTicket]) //visualiza as informações do tipo do ticket selecionado, onde as informações devem ser complementadas aqui antes de fazer o POST à API.
   };
 
-  const tickets = [
+  const typeTickets = [
     { name: 'Presencial', price: 250, isRemote: false },
     { name: 'Online', price: 100, isRemote: true },
   ];
@@ -32,7 +33,7 @@ export default function Payment() {
     <h2>Primeiro, escolha sua modalidade de ingresso</h2>
 
     <ChooseModality>
-    {tickets.map((ticket, index) => (
+    {typeTickets.map((ticket, index) => (
         <ChooseTicket
           key={index}
           name={ticket.name}
@@ -42,6 +43,8 @@ export default function Payment() {
         />
       ))}
     </ChooseModality>
+    
+    {/* {typeTickets[selectedTicket] && <div>segunda parte aqui</div>} */}
 
   </TicketContainer>
   
