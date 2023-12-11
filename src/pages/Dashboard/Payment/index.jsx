@@ -3,8 +3,9 @@ import useEnrollment from "../../../hooks/api/useEnrollment";
 import { ChooseTicket } from "../../../components/Payment/ChooseTicket";
 import { useState } from "react";
 import { PaymentTitle } from "../../../components/Payment/PaymentTitle";
+import Credit from "./credit";
 
-function ticketReserve (selectedTicket, selectedAccommodation) {
+function ticketReserve (selectedTicket, selectedAccommodation, setNext, setFnally) {
   if (selectedAccommodation != undefined) {
     var choice = `${selectedTicket.name} + ${selectedAccommodation.name}`
     var price = selectedTicket.price + selectedAccommodation.price;
@@ -14,6 +15,12 @@ function ticketReserve (selectedTicket, selectedAccommodation) {
     var price = selectedTicket.price 
   }
   alert("Ticket Escolhido: " +choice+" \n R$"+price);
+  setFnally({
+    choice,
+    price
+  })
+  setNext(true);
+
 }
 
 
@@ -22,6 +29,8 @@ export default function Payment() {
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [selectedAccommodation, setSelectedAccommodation] = useState(null);
   const [selectedReserve, setSelectedReserve] = useState(false);
+  const [next, setNext] = useState(false);
+  const [fnally, setFnally] = useState({});
  
   const handleTicketClick = (index) => {
     setSelectedTicket(index === selectedTicket ? null : index);
@@ -51,7 +60,7 @@ export default function Payment() {
   return (<>
 
    <PaymentTitle />
-        
+  
   {
   
   !enrollment ? 
@@ -59,7 +68,7 @@ export default function Payment() {
   de prosseguir pra escolha de ingresso</Container> 
 
 : 
-
+  !next ?
   <TicketContainer>
 
     <Box>
@@ -106,7 +115,7 @@ export default function Payment() {
       
       <div>
       <h3> Fechado! O total ficou em <b>R$ {typeTickets[selectedTicket].price + typeAccommodation[selectedAccommodation].price }</b>. Agora é só confirmar </h3>
-      <ButtonConfirm onClick={() => ticketReserve(typeTickets[selectedTicket], typeAccommodation[selectedAccommodation])}>RESERVAR INGRESSO</ButtonConfirm>
+      <ButtonConfirm onClick={() => ticketReserve(typeTickets[selectedTicket], typeAccommodation[selectedAccommodation], setNext, setFnally)}>RESERVAR INGRESSO</ButtonConfirm>
       </div>
       
       : 
@@ -121,7 +130,7 @@ export default function Payment() {
     
     <div>
     <h2> Fechado! O total ficou em <b>R$ {typeTickets[selectedTicket].price }</b>. Agora é só confirmar </h2>
-    <ButtonConfirm onClick={() => ticketReserve(typeTickets[selectedTicket], typeAccommodation[selectedAccommodation])}>RESERVAR INGRESSO</ButtonConfirm>
+    <ButtonConfirm onClick={() => ticketReserve(typeTickets[selectedTicket], typeAccommodation[selectedAccommodation], setNext, setFnally)}>RESERVAR INGRESSO</ButtonConfirm>
     </div>
 
     :
@@ -131,9 +140,9 @@ export default function Payment() {
 
     }
   </TicketContainer>
-  
+  : 
+  <Credit price={fnally.price} choice={fnally.choice}/>
   }
-
   </>)
 
 }
