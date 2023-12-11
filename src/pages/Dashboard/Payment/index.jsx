@@ -7,20 +7,32 @@ import { PaymentTitle } from "../../../components/Payment/PaymentTitle";
 export default function Payment() {  
   const { enrollment } = useEnrollment();
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const [selectedAccommodation, setSelectedAccommodation] = useState(null);
 
   const handleTicketClick = (index) => {
     setSelectedTicket(index === selectedTicket ? null : index);
     //console.log(typeTickets[selectedTicket]) //visualiza as informações do tipo do ticket selecionado, onde as informações devem ser complementadas aqui antes de fazer o POST à API.
   };
 
+  const handleAccommodationClick = (index) => {
+    setSelectedAccommodation(index === selectedAccommodation ? null : index);
+    //console.log(typeAccommodation[selectedAccommodation]) //visualiza as informações do tipo de hospedagem selecionado, onde as informações devem ser complementadas aqui antes de fazer o POST à API.
+  };
+
   const typeTickets = [
     { name: 'Presencial', price: 250, isRemote: false },
     { name: 'Online', price: 100, isRemote: true },
   ];
+
+  const typeAccommodation = [
+    {name: 'Sem Hotel', includesHotel: false, price: 0},
+    {name: 'Com Hotel', includesHotel: true, price: 350}
+  ]
+  
   
   return (<>
 
-  <PaymentTitle />
+   <PaymentTitle />
         
   {
   
@@ -31,6 +43,8 @@ export default function Payment() {
 : 
 
   <TicketContainer>
+
+    <Box>
     <h2>Primeiro, escolha sua modalidade de ingresso</h2>
 
     <ChooseModality>
@@ -44,8 +58,41 @@ export default function Payment() {
         />
       ))}
     </ChooseModality>
+    </Box>
     
-    {/* {typeTickets[selectedTicket] && <div>segunda parte aqui</div>} */}
+    {
+    
+    typeTickets[selectedTicket] ? 
+
+    !typeTickets[selectedTicket].isRemote ?
+    
+    <Box>
+
+      <h2>Ótimo! Agora escolha sua modalidade de hospedagem</h2>
+
+      <ChooseModality>
+      {typeAccommodation.map((ticket, index) => (
+          <ChooseTicket
+            key={index}
+            name={ticket.name}
+            price={ticket.price}
+            onClick={() => handleAccommodationClick(index)}
+            selected={index === selectedAccommodation}
+          />
+        ))}
+      </ChooseModality>
+      
+    </Box>
+
+    :
+
+    <div>implementação aqui</div>
+
+    :
+
+   <div></div>
+    
+    }
 
   </TicketContainer>
   
@@ -55,12 +102,21 @@ export default function Payment() {
 
 }
 
+const Box = styled.div`
+ 
+`
+
 const ChooseModality = styled.div`
   display: flex;
   gap: 24px;
 `
 
 const TicketContainer = styled.div`
+
+display: flex;
+flex-direction: column;
+gap: 37px;
+
 h2 {
   color: #8E8E8E;
   font-family: Roboto;
