@@ -4,11 +4,25 @@ import { ChooseTicket } from "../../../components/Payment/ChooseTicket";
 import { useState } from "react";
 import { PaymentTitle } from "../../../components/Payment/PaymentTitle";
 
+function ticketReserve (selectedTicket, selectedAccommodation) {
+  if (selectedAccommodation != undefined) {
+    var choice = `${selectedTicket.name} + ${selectedAccommodation.name}`
+    var price = selectedTicket.price + selectedAccommodation.price;
+  }
+  else {
+    var choice = selectedTicket.name
+    var price = selectedTicket.price 
+  }
+  alert("Ticket Escolhido: " +choice+" \n R$"+price);
+}
+
+
 export default function Payment() {  
   const { enrollment } = useEnrollment();
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [selectedAccommodation, setSelectedAccommodation] = useState(null);
-
+  const [selectedReserve, setSelectedReserve] = useState(false);
+ 
   const handleTicketClick = (index) => {
     setSelectedTicket(index === selectedTicket ? null : index);
     //console.log(typeTickets[selectedTicket]) //visualiza as informações do tipo do ticket selecionado, onde as informações devem ser complementadas aqui antes de fazer o POST à API.
@@ -17,6 +31,10 @@ export default function Payment() {
   const handleAccommodationClick = (index) => {
     setSelectedAccommodation(index === selectedAccommodation ? null : index);
     //console.log(typeAccommodation[selectedAccommodation]) //visualiza as informações do tipo de hospedagem selecionado, onde as informações devem ser complementadas aqui antes de fazer o POST à API.
+  };
+
+  const handleReserveClick = (index) => {
+    setSelectedTicket(index? true : false);
   };
 
   const typeTickets = [
@@ -81,19 +99,37 @@ export default function Payment() {
           />
         ))}
       </ChooseModality>
+
+      { 
+      
+      typeAccommodation[selectedAccommodation] ? 
+      
+      <div>
+      <h3> Fechado! O total ficou em <b>R$ {typeTickets[selectedTicket].price + typeAccommodation[selectedAccommodation].price }</b>. Agora é só confirmar </h3>
+      <ButtonConfirm onClick={() => ticketReserve(typeTickets[selectedTicket], typeAccommodation[selectedAccommodation])}>RESERVAR INGRESSO</ButtonConfirm>
+      </div>
+      
+      : 
+      
+      <h2></h2>
+      
+      }
       
     </Box>
 
     :
-
-    <div>implementação aqui</div>
+    
+    <div>
+    <h2> Fechado! O total ficou em <b>R$ {typeTickets[selectedTicket].price }</b>. Agora é só confirmar </h2>
+    <ButtonConfirm onClick={() => ticketReserve(typeTickets[selectedTicket], typeAccommodation[selectedAccommodation])}>RESERVAR INGRESSO</ButtonConfirm>
+    </div>
 
     :
 
    <div></div>
-    
-    }
 
+
+    }
   </TicketContainer>
   
   }
@@ -103,7 +139,7 @@ export default function Payment() {
 }
 
 const Box = styled.div`
- 
+ margin-bottom: 10px;
 `
 
 const ChooseModality = styled.div`
@@ -128,6 +164,17 @@ h2 {
   margin-bottom: 17px;
 }
 
+h3 {
+  color: #8E8E8E;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 17px;
+  margin-bottom: 17px;
+}
+
 `
 
 const Container = styled.div`
@@ -146,4 +193,26 @@ const Container = styled.div`
   line-height: normal;
 
   padding-inline: 230px;    
+`
+const ButtonConfirm = styled.button`
+
+display: flex;
+align-items: center;
+justify-content: center;  
+
+width: 162px;
+height: 37px;
+border-radius: 4px;
+border-color: #E0E0E0;
+background: #E0E0E0;
+
+
+font-color: #00000059;
+text-align: center;
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 16.41px;
+
 `
