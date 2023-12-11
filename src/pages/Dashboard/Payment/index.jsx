@@ -1,3 +1,99 @@
-export default function Payment() {
-  return 'Pagamento: Em breve!';
+import styled from "styled-components";
+import useEnrollment from "../../../hooks/api/useEnrollment";
+import { ChooseTicket } from "../../../components/Payment/ChooseTicket";
+import { useState } from "react";
+
+export default function Payment() {  
+  const { enrollment } = useEnrollment();
+  const [selectedTicket, setSelectedTicket] = useState(null);
+
+  const handleTicketClick = (index) => {
+    setSelectedTicket(index === selectedTicket ? null : index);
+  };
+
+  const tickets = [
+    { name: 'Presencial', price: 250, isRemote: false },
+    { name: 'Online', price: 100, isRemote: true },
+  ];
+  
+  return (<>
+
+  <PaymentTitle>Ingresso e pagamento</PaymentTitle>
+        
+  {
+  
+  !enrollment ? 
+  <Container>Você precisa completar sua inscrição antes
+  de prosseguir pra escolha de ingresso</Container> 
+
+: 
+
+  <TicketContainer>
+    <h2>Primeiro, escolha sua modalidade de ingresso</h2>
+
+    <ChooseModality>
+    {tickets.map((ticket, index) => (
+        <ChooseTicket
+          key={index}
+          name={ticket.name}
+          price={ticket.price}
+          onClick={() => handleTicketClick(index)}
+          selected={index === selectedTicket}
+        />
+      ))}
+    </ChooseModality>
+
+  </TicketContainer>
+  
+  }
+
+  </>)
+
 }
+
+const ChooseModality = styled.div`
+  display: flex;
+  gap: 24px;
+`
+
+const TicketContainer = styled.div`
+h2 {
+  padding-top: 37px;
+  color: #8E8E8E;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  margin-bottom: 17px;
+}
+
+`
+
+const PaymentTitle = styled.h1`
+  color: #000;
+  font-family: Roboto;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`
+
+const Container = styled.div`
+  height: calc(100% - 40px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+
+  color: #8E8E8E;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  padding-inline: 230px;    
+`
