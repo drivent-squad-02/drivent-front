@@ -14,5 +14,7 @@ const Container = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
+    padding-bottom: 37px;
   }
 `

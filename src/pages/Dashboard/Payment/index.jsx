@@ -62,7 +62,6 @@ const ChooseModality = styled.div`
 
 const TicketContainer = styled.div`
 h2 {
-  padding-top: 37px;
   color: #8E8E8E;
   font-family: Roboto;
   font-size: 20px;
