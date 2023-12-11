@@ -2,6 +2,7 @@ import styled from "styled-components";
 import useEnrollment from "../../../hooks/api/useEnrollment";
 import { ChooseTicket } from "../../../components/Payment/ChooseTicket";
 import { useState } from "react";
+import { PaymentTitle } from "../../../components/Payment/PaymentTitle";
 
 export default function Payment() {  
   const { enrollment } = useEnrollment();
@@ -19,7 +20,7 @@ export default function Payment() {
   
   return (<>
 
-  <PaymentTitle>Ingresso e pagamento</PaymentTitle>
+  <PaymentTitle />
         
   {
   
@@ -72,15 +73,6 @@ h2 {
   margin-bottom: 17px;
 }
 
-`
-
-const PaymentTitle = styled.h1`
-  color: #000;
-  font-family: Roboto;
-  font-size: 34px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 `
 
 const Container = styled.div`
