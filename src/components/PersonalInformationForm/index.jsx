@@ -97,6 +97,7 @@ export default function PersonalInformationForm() {
         addressDetail: enrollment.address.addressDetail
       });
     }
+
   }, [enrollment]);
 
   function isValidCep(cep) {
