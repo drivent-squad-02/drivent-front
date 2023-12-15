@@ -2,17 +2,21 @@ import styled from "styled-components";
 import useEnrollment from "../../../hooks/api/useEnrollment";
 import { ChooseTicket } from "../../../components/Payment/ChooseTicket";
 import { useState } from "react";
-import { PaymentTitle } from "../../../components/Payment/PaymentTitle";
 import Credit from "./credit";
+import { DashboardTitle } from "../../../components/Dashboard/DashboardTitle";
 
 function ticketReserve (selectedTicket, selectedAccommodation, setNext, setFnally) {
+
+  let choice;
+  let price;
+  
   if (selectedAccommodation != undefined) {
-    var choice = `${selectedTicket.name} + ${selectedAccommodation.name}`
-    var price = selectedTicket.price + selectedAccommodation.price;
+    choice = `${selectedTicket.name} + ${selectedAccommodation.name}`
+    price = selectedTicket.price + selectedAccommodation.price;
   }
   else {
-    var choice = selectedTicket.name
-    var price = selectedTicket.price 
+     choice = selectedTicket.name
+     price = selectedTicket.price 
   }
   alert("Ticket Escolhido: " +choice+" \n R$"+price);
   setFnally({
@@ -59,7 +63,7 @@ export default function Payment() {
   
   return (<>
 
-   <PaymentTitle />
+   <DashboardTitle content='Ingresso e Pagamento'/>
   
   {
   
