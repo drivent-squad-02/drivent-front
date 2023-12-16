@@ -22,7 +22,7 @@ const PaymentForm = () => {
     setState((prev) => ({ ...prev, focus: evt.target.name }));
   }
 
-  return (rein
+  return (
     <div>
       <Cards
         number={state.number}

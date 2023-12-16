@@ -1,4 +1,4 @@
-  import styled from "styled-components";
+import styled from "styled-components";
 import { DashboardTitle } from "../../../components/Dashboard/DashboardTitle";
 import { HotelCard } from "../../../components/Hotel/HotelCard";
 import useHotel from "../../../hooks/api/useHotel";
@@ -6,8 +6,10 @@ import useHotel from "../../../hooks/api/useHotel";
 export default function Hotel() {
 
   const { hotels } = useHotel();
-  
+    
   return (
+
+    // verifica payment ? (verifica o ticket ? mostra 1 tela : GERALDO <p> texto aqui </p>) : mostra 2 tela.
   
   <Container>
   

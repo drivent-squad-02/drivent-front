@@ -14,7 +14,7 @@ export function HotelCard({ name, image }) {
 
       <span>
         <h4>Tipos de acomodação:</h4>
-        <p>Single e Double</p>
+        <p>Single, double e triple</p>
       </span>
 
       <span>
