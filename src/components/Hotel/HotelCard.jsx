@@ -1,31 +1,32 @@
+import { css } from "styled-components"
 import styled from "styled-components"
 
-export function HotelCard({ name, image }) {
+export function HotelCard({ name, image, availableBooking, onClick, selected }) {
 
   return (
-  
-  <Container>
 
-    <div>
+    <Container $total={availableBooking} selected={selected} onClick={onClick}>
 
-      <HotelImage url = {image}/>
+      <div>
 
-      <h3>{name}</h3>
+        <HotelImage $url={image} />
 
-      <span>
-        <h4>Tipos de acomodação:</h4>
-        <p>Single, double e triple</p>
-      </span>
+        <h3>{name}</h3>
 
-      <span>
-        <h4>Vagas disponíveis:</h4>
-        <p>100</p>
-      </span>
+        <span>
+          <h4>Tipos de acomodação:</h4>
+          <p>Single, double e triple</p>
+        </span>
+
+        <span>
+          <h4>Vagas disponíveis:</h4>
+          <p>{availableBooking}</p>
+        </span>
 
       </div>
 
-  </Container>
-  
+    </Container>
+
   )
 }
 
@@ -44,6 +45,20 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
+  ${({ $total }) => {
+    return $total === 0 ? css`
+      opacity: 0.5;
+      cursor: default;
+      pointer-events: none;
+    ` : css`
+      
+    `
+  }}
+
+${({ selected }) => selected && css`
+    background: #FFEED2;
+  `}
+  
   div {
     display: flex;
     flex-direction: column;
@@ -76,6 +91,9 @@ const HotelImage = styled.img`
   height: 109px;
 
   border-radius: 5px;
-  background: lightgray url(${({url}) => url}) 50% / cover no-repeat;
+  
+  background: url(${({ $url }) => $url});
+  background-position: center;
+  background-size: contain;
 
 `
