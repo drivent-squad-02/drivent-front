@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
-export function PaymentTitle() {
+export function DashboardTitle({ content }) {
 
-  return (<Container><h1>Ingresso e pagamento</h1></Container>)
+  return (<Container><h1>{content}</h1></Container>)
 }
 
 const Container = styled.div`
