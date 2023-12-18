@@ -150,5 +150,3 @@ const SlidingContainer = styled.div`
   &::-webkit-scrollbar {
   display: none;
 }
-`
-
