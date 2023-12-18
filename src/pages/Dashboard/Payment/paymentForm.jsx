@@ -51,6 +51,7 @@ const PaymentForm = () => {
         onChange={handleInputChange}
         onFocus={handleInputFocus}/>
 
+        <box2>
         <input type="text"
         name="expiry"
         placeholder="Valid Thru"
@@ -64,7 +65,9 @@ const PaymentForm = () => {
         value={state.cvc}
         onChange={handleInputChange}
         onFocus={handleInputFocus}/>
-    
+        </box2>
+
+        <ButtonConfirm>FINALIZAR PAGAMENTO</ButtonConfirm>
 
       </FormContainer>
     </PaymentContainer>
@@ -92,25 +95,32 @@ flex-direction: column;
 width: 400px;
 height: 225px;
 
+box2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100px;
+}
+
 input {
   height: 30px;
 
-  border-radius: 30px
-  border: 3px
-  border-color: #8E8E8E;
+  border-radius: 4px;
+  border-color: #E0E0E0;
   
   color: #8E8E8E;
   font-color: #8E8E8E;
   font-family: Roboto;
   font-size: 20px;
   font-style: normal;
-  font-weight: 400;
   line-height: normal;
 
   margin-top: 10px;
+  margin-left: 5px;
 }
 
 h1 {
+  margin-left: 10px;
   color: #8E8E8E;
   font-family: Roboto;
   font-size: 15px;
@@ -118,5 +128,30 @@ h1 {
   font-weight: 400;
   line-height: normal;
 }
+
+`
+
+const ButtonConfirm = styled.button`
+
+margin-top: 10px;
+
+display: flex;
+align-items: center;
+justify-content: center;  
+
+width: 200px;
+height: 37px;
+border-radius: 4px;
+border-color: #E0E0E0;
+background: #E0E0E0;
+
+
+font-color: #00000059;
+text-align: center;
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 16.41px;
 
 `
