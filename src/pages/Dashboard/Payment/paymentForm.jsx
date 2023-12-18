@@ -134,6 +134,7 @@ h1 {
 const ButtonConfirm = styled.button`
 
 margin-top: 10px;
+margin-left: 10px;
 
 display: flex;
 align-items: center;
