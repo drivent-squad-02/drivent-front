@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { DashboardTitle } from "../../../components/Dashboard/DashboardTitle";
 import { HotelCard } from "../../../components/Hotel/HotelCard";
 import useHotel from "../../../hooks/api/useHotel";
@@ -148,5 +148,6 @@ const SlidingContainer = styled.div`
   overflow-x: scroll;
 
   &::-webkit-scrollbar {
-  display: none;
-}
+    display: none;
+  }
+`
